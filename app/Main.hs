@@ -28,7 +28,7 @@ type Name = String
 customers :: Customer -> MVar Customer -> IO ()
 customers customer_thread box = do 
    putMVar box customer_thread
-   threadDelay 100
+   putStrLn $ "The customer in the box is " ++ (show customer_thread)
    customers customer_thread box
 
 
@@ -53,5 +53,9 @@ main = do
   box <- newEmptyMVar
   mapM_ forkIO [customers c1 box, customers c2 box,customers c3 box, customers c4 box, customers c5 box, customers c6 box, customers c7 box, customers c8 box, customers c9 box, customers c10 box]
   putStrLn $ "10 threads created."
-  customer_a <- takeMVar box
-  putStrLn $ "The customer in the box is " ++ (show customer_a)
+  --customer_a <- takeMVar box
+  --putStrLn $ "The customer in the box is " ++ (show customer_a)
+  putStrLn $ "end of main"
+
+-- we can see which thread is running  
+-- next we need to select two of them
